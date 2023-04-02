@@ -6,21 +6,6 @@ import app from '../app';
 chai.use(chaiHttp);
 
 describe('GET /api/medianprime/:n', () => {
-
-    let server;
-
-    before(() => {
-        server = app.listen(3002);
-    });
-
-    after(() => {
-        server.close(() => {
-            console.log('Test server stopped');
-           // process.exit();
-        });
-    });
-
-
     it('should return an error message if the empty input', (done) => {
         chai.request(app)
             .get(`/api/medianprime/:''`)

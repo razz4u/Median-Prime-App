@@ -1,10 +1,3 @@
-/*
-const express = require('express');
-const config = require('./config')
-const cors = require('cors')
-const app = express()
-const getMedianPrimes = require('./services/getMedianPrimes')
-*/
 import express from 'express';
 import config from './config';
 import cors from 'cors';
@@ -13,9 +6,9 @@ import getMedianPrimes from './services/getMedianPrimes';
 const app = express()
 
 app.use(cors({
-    origin: ['http://localhost:3001'],
-    methods: ['GET']
-  }));
+    origin: config.ALLOWED_CLIENT,
+    methods: config.METHODS
+}));
 
 const PORT = process.env.PORT || config.PORT || 3000
 app.use(express.json())
@@ -29,9 +22,14 @@ app.get('/api/medianprime/:n', (req,res) => {
     if(!Number.isInteger(n)){
         return res.status(400).json("Invalid user input")
     }
-    
-    let median = getMedianPrimes(n);
-    res.status(200).json(median)
+
+    try {
+        let median = getMedianPrimes(n);
+        res.status(200).json(median)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+
 })
 
 export default app;

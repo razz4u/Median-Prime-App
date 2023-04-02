@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography, Box, AppBar, Toolbar, Alert } from '@mui/material';
 import { Container } from '@mui/system';
+import config from '../config'
+
+const url = config.URL;
 
 const UserInput = () => {
     const [n, setN] = useState('');
@@ -17,11 +20,12 @@ const UserInput = () => {
         }else {
             setErrorMsg('');
           }
+          setMedian(null)
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        fetch(`http://localhost:3000/api/medianprime/${n}`)
+        fetch(url + `/${n}`)
             .then((res) => res.json())
             .then((data) => setMedian(data.join(' ')))
             .catch((error) => setMedian(`Error: ${error.message}`));
