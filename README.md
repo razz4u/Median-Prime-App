@@ -21,6 +21,10 @@ For Client and Server
 - Navigate to each client and server folder
 - Run npm test to run the unit tests.
 
+## Note
+The max value tested for n = 100000000
+
+
 ## Answer 
 - Do you have production experience with Node prior to the submission of this code challenge ? if yes for how log ?
 
